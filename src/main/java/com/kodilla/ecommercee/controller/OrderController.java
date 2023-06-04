@@ -26,17 +26,17 @@ public class OrderController {
 
     @GetMapping(value = "{orderId}")
     public OrderDto getOrder(@PathVariable Long orderId) {
-        return new OrderDto(1L);
+        return new OrderDto(1L, true );
 
     }
 
     @PutMapping
-    public OrderDto updateOrder(OrderDto orderDto) {
-        return new OrderDto(1L);
+    public OrderDto updateOrder(@RequestBody OrderDto orderDto) {
+        return new OrderDto(1L, true);
     }
 
-    @DeleteMapping
-    public void deleteOrder(Long orderId) {
+    @DeleteMapping(value = "{orderId}")
+    public void deleteOrder(@PathVariable Long orderId) {
 
     }
 
