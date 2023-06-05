@@ -19,18 +19,22 @@ public class ProductController {
     public ResponseEntity<List<Object>> getProducts() {
         return ResponseEntity.ok(new ArrayList<>());
     }
+
     @GetMapping(value = "{productId}")
     public ResponseEntity<Object> getProduct(@PathVariable Long productId) {
         return ResponseEntity.ok(new Object());
     }
+
     @DeleteMapping(value = "{productId}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long productId) {
         return ResponseEntity.ok().build();
     }
+
     @PutMapping
     public ResponseEntity<Object> updateProduct(@RequestBody Object productDto) {
         return ResponseEntity.ok(new Object());
     }
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createProduct(@RequestBody Object productDto) {
         return ResponseEntity.ok().build();
