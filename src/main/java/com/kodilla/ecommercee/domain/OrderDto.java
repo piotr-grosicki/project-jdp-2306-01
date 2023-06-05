@@ -7,6 +7,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public class OrderDto {
     private Long orderId;
-    private Long cartId;
     private boolean orderSent;
+
 }

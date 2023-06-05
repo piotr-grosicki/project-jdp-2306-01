@@ -7,6 +7,4 @@ import lombok.Getter;
 @AllArgsConstructor
 public class ProductDto {
     private Long productId;
-    private Long groupId;
-    private String productName;
 }

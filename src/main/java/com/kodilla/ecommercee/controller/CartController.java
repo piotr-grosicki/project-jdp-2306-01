@@ -1,7 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.CartDto;
-import com.kodilla.ecommercee.domain.CartItemDto;
+import com.kodilla.ecommercee.domain.CartProductDto;
 import com.kodilla.ecommercee.domain.OrderDto;
 import com.kodilla.ecommercee.domain.UserDto;
 import org.springframework.web.bind.annotation.*;
@@ -14,28 +14,27 @@ import java.util.List;
 @RequestMapping("/v1/carts")
 public class CartController {
 
-    @PostMapping
+    @PostMapping(value = "/new")
     public CartDto createCart(@RequestBody UserDto userDto) {
         return new CartDto(1L, 1L);
     }
 
     @GetMapping(value = "{cartId}")
-    public List<CartItemDto> getCart(@PathVariable Long cartId) {
+    public List<CartProductDto> getCart(@PathVariable Long cartId) {
         return new ArrayList<>();
     }
 
-    @PostMapping(value = "{productId}")
-    public CartItemDto addCartItem(@PathVariable Long productId) {
-        return new CartItemDto(1L, 1L);
+    @PostMapping(value = "{cartId}/{productId}")
+    public CartProductDto addCartProduct(@PathVariable Long cartId, @PathVariable Long productId) {
+        return new CartProductDto(1L, 1L);
     }
 
-    @DeleteMapping(value = "{cartItemId}")
-    public void deleteCartItem(@PathVariable Long cartItemId) {
+    @DeleteMapping(value = "{cartId}/{productId}")
+    public void deleteCartProduct(@PathVariable Long cartId, @PathVariable Long productId) {
     }
 
-    @PostMapping
+    @PostMapping(value = "/order")
     public OrderDto createOrder(@RequestBody CartDto cartDto) {
-        return new OrderDto(1L,1L, false);
+        return new OrderDto(1L, false);
     }
-
 }
