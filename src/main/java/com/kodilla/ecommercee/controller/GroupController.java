@@ -1,43 +1,33 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.Group;
-import com.kodilla.ecommercee.service.GroupService;
-import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.kodilla.ecommercee.domain.GroupDto;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/groups")
-@AllArgsConstructor
+@RequestMapping("/v1/groups")
+@CrossOrigin("*")
+@RequiredArgsConstructor
 public class GroupController {
-
-    private final GroupService groupService;
-
     @GetMapping
-    public ResponseEntity<List<Group>> getAllGroups() {
-        List<Group> groups = groupService.getAllGroups();
-        return ResponseEntity.ok(groups);
+    public List<GroupDto> getGroups() {
+        return new ArrayList<>();
     }
 
-    @PostMapping
-    public ResponseEntity<Group> addGroup(@RequestBody Group group) {
-        Group createdGroup = groupService.addGroup(group);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdGroup);
+    @GetMapping(value = "/{groupId}")
+    public GroupDto getGroup(@PathVariable Long groupId) {
+        return new GroupDto();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Group> getGroupById(@PathVariable("id") Long id) {
-        Group group = groupService.getGroupById(id);
-        return group != null ? ResponseEntity.ok(group) : ResponseEntity.notFound().build();
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void createGroup(@RequestBody GroupDto groupDto) {
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Group> updateGroup(@PathVariable("id") Long id, @RequestBody Group group) {
-        Group updatedGroup = groupService.updateGroup(id, group);
-        return updatedGroup != null ? ResponseEntity.ok(updatedGroup) : ResponseEntity.notFound().build();
+    @PutMapping(value = "/{groupId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void updateGroup(@PathVariable Long groupId, @RequestBody GroupDto groupDto) {
     }
 }
