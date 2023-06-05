@@ -22,16 +22,16 @@ public class UserController {
         return new UserDto(1L);
     }
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createUser(UserDto userDto) {
+    public void createUser(@RequestBody UserDto userDto) {
     }
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public UserDto blockUser(UserDto userDto) {
+    public UserDto blockUser(@RequestBody UserDto userDto) {
         return new UserDto(1L);
     }
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void generateToken(UserDto userDto) {
+    public void generateToken(@RequestBody UserDto userDto) {
     }
     @DeleteMapping
-    public  void deleteUser(Long userId) {
+    public  void deleteUser(@PathVariable Long userId) {
     }
 }
