@@ -5,6 +5,8 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class UserDto {
-    private Long userId;
+public class OrderDto {
+    private Long orderId;
+    private boolean orderSent;
+
 }
