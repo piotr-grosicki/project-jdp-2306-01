@@ -20,7 +20,8 @@ public class OrderController {
     }
 
     @PostMapping
-    public void createOrder(OrderDto orderDto) {
+    public OrderDto createOrder(@RequestBody OrderDto orderDto) {
+        return new OrderDto(1L, true);
 
     }
 
