@@ -4,6 +4,7 @@ import com.kodilla.ecommercee.domain.CartDto;
 import com.kodilla.ecommercee.domain.CartProductDto;
 import com.kodilla.ecommercee.domain.OrderDto;
 import com.kodilla.ecommercee.domain.UserDto;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.List;
 @RequestMapping("/v1/carts")
 public class CartController {
 
-    @PostMapping(value = "/new")
+    @PostMapping(value = "/new", consumes = MediaType.APPLICATION_JSON_VALUE)
     public CartDto createCart(@RequestBody UserDto userDto) {
         return new CartDto(1L, 1L);
     }
