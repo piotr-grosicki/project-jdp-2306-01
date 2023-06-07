@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDto {
-
     @JsonProperty("orderId")
     private Long orderId;
-
     @JsonProperty("orderSent")
     private boolean orderSent;
+
 }
