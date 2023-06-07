@@ -1,6 +1,6 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.OrderDto;
+import com.kodilla.ecommercee.domain.dto.OrderDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,8 +38,6 @@ public class OrderController {
 
     @DeleteMapping(value = "{orderId}")
     public void deleteOrder(@PathVariable Long orderId) {
-
     }
-
 
 }
