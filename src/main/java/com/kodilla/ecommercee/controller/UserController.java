@@ -1,6 +1,6 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.UserDto;
+import com.kodilla.ecommercee.domain.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -17,21 +17,26 @@ public class UserController {
     public List<UserDto> getUsers() {
         return new ArrayList<>();
     }
+
     @GetMapping(value = "{userId}")
-    public UserDto getUser(@PathVariable Long orderId) {
+    public UserDto getUser(@PathVariable Long userId) {
         return new UserDto(1L);
     }
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createUser(@RequestBody UserDto userDto) {
     }
+
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public UserDto blockUser(@RequestBody UserDto userDto) {
         return new UserDto(1L);
     }
-    //@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    //public void generateToken(@RequestBody UserDto userDto) {
-    //}
-    @DeleteMapping
-    public  void deleteUser(@PathVariable Long userId) {
+
+    @PutMapping(value ="/token", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void generateToken(@RequestBody UserDto userDto) {
+    }
+
+    @DeleteMapping(value = "{userId}")
+    public void deleteUser(@PathVariable Long userId) {
     }
 }
