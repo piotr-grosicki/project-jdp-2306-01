@@ -13,7 +13,6 @@ import java.util.*;
 @AllArgsConstructor
 @Entity(name = "USERS")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
@@ -43,3 +42,4 @@ public class User {
             fetch = FetchType.LAZY)
     public List<Cart> cartsList = new ArrayList();
 }
+
