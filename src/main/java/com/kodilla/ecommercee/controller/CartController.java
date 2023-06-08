@@ -1,9 +1,6 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.CartDto;
-import com.kodilla.ecommercee.domain.CartProductDto;
-import com.kodilla.ecommercee.domain.OrderDto;
-import com.kodilla.ecommercee.domain.UserDto;
+import com.kodilla.ecommercee.domain.*;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,20 +18,21 @@ public class CartController {
     }
 
     @GetMapping(value = "{cartId}")
-    public List<CartProductDto> getCart(@PathVariable Long cartId) {
+    public List<ProductDto> getCart(@PathVariable Long cartId) {
         return new ArrayList<>();
     }
 
     @PostMapping(value = "{cartId}/{productId}")
-    public CartProductDto addCartProduct(@PathVariable Long cartId, @PathVariable Long productId) {
-        return new CartProductDto(1L, 1L);
+    public List<ProductDto> addCartProduct(@PathVariable Long cartId, @PathVariable Long productId)  {
+        return new ArrayList<>();
     }
 
     @DeleteMapping(value = "{cartId}/{productId}")
-    public void deleteCartProduct(@PathVariable Long cartId, @PathVariable Long productId) {
+    public List<ProductDto> deleteCartProduct(@PathVariable Long cartId, @PathVariable Long productId) {
+        return new ArrayList<>();
     }
 
-    @PostMapping(value = "/order")
+    @PostMapping(value = "/order", consumes = MediaType.APPLICATION_JSON_VALUE)
     public OrderDto createOrder(@RequestBody CartDto cartDto) {
         return new OrderDto(1L, false);
     }
