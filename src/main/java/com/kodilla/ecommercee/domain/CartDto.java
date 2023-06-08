@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class UserDto {
+public class CartDto {
+    private Long cartId;
     private Long userId;
 }
