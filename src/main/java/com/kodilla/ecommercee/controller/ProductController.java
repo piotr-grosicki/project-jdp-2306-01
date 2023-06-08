@@ -22,7 +22,7 @@ public class ProductController {
 
     @GetMapping(value = "{productId}")
     public ResponseEntity<Object> getProduct(@PathVariable Long productId) {
-        return ResponseEntity.ok(new Object());
+        return ResponseEntity.ok("");
     }
 
     @DeleteMapping(value = "{productId}")
@@ -32,7 +32,7 @@ public class ProductController {
 
     @PutMapping
     public ResponseEntity<Object> updateProduct(@RequestBody Object productDto) {
-        return ResponseEntity.ok(new Object());
+        return ResponseEntity.ok("");
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
