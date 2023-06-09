@@ -13,9 +13,11 @@ import java.util.*;
 @AllArgsConstructor
 @Entity(name = "USERS")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
+
 
     @Column(name = "USER_NAME")
     private String userName;
