@@ -36,7 +36,4 @@ public class Product {
             @JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")}
     )
     private List<Cart> getCartList = new ArrayList<>();
-    public Product (String productName) {
-        this.productName = productName;
-    }
 }
