@@ -22,7 +22,7 @@ public class Group {
 
     @OneToMany
     @JoinTable(
-            name="CUST_PHONE",
+            name="GROUP_PRODUCT",
             joinColumns=
             @JoinColumn(name="GROUP_ID", referencedColumnName="GROUP_ID"),
             inverseJoinColumns=
