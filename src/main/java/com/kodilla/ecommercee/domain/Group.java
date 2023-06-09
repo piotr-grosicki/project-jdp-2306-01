@@ -31,4 +31,13 @@ public class Group {
             @JoinColumn(name="PRODUCT_ID", referencedColumnName="PRODUCT_ID")
     )
     private List<Product> productList;
+
+    public Group(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public Group(String groupName, List<Product> productList) {
+        this.groupName = groupName;
+        this.productList = productList;
+    }
 }
