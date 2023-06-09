@@ -29,13 +29,6 @@ public class User {
     @Column(name = "USER_BLOCKED")
     private boolean isUserBlocked;
 
-    public User (String userName, String userToken, LocalDate userTokenValid, boolean isUserBlocked) {
-        this.userName = userName;
-        this.userToken = userToken;
-        this.userTokenValid = userTokenValid;
-        this.isUserBlocked = isUserBlocked;
-    }
-
     @OneToMany(targetEntity = Cart.class,
             mappedBy = "user",
             cascade = CascadeType.ALL,
