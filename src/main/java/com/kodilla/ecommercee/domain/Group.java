@@ -1,9 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,7 +16,8 @@ public class Group {
     @Column(name = "GROUP_ID")
     private Long groupId;
 
-    @Column(name = "GROUP_NAME")
+    @Column(name = "GROUP_NAME", unique = true)
+    @NonNull
     private String groupName;
 
     @OneToMany
