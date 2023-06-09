@@ -19,5 +19,22 @@ public class User {
     private Long userId;
 
 
+    @Column(name = "USER_NAME")
+    private String userName;
+
+    @Column(name = "USER_TOKEN")
+    private String userToken;
+
+    @Column(name = "USER_TOKEN_VALID")
+    private LocalDate userTokenValid;
+
+    @Column(name = "USER_BLOCKED")
+    private boolean isUserBlocked;
+
+    @OneToMany(targetEntity = Cart.class,
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    public List<Cart> getCartsList = new ArrayList();
 }
 
