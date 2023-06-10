@@ -1,6 +1,5 @@
 package com.kodilla.ecommercee.domain.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,8 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDto {
-    @JsonProperty("orderId")
     private Long orderId;
-    @JsonProperty("orderSent")
     private boolean orderSent;
 }

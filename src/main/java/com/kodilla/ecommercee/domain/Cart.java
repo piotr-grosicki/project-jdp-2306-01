@@ -1,18 +1,17 @@
 package com.kodilla.ecommercee.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "CARTS")
+
+@Entity(name = "CARTS")
 public class Cart {
     @Id
-    @GeneratedValue
-    @NotNull
-    @Column(name = "CART_ID", unique = true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "CART_ID")
     private Long cartId;
 
-    public Cart() {
-
-    }
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private User user;
 }
+

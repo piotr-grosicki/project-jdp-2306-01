@@ -8,13 +8,10 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Setter
-@Entity
-@Table(name = "ORDERS")
+@Entity(name = "ORDERS")
 public class Order {
     @Id
-    @GeneratedValue
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ORDER_ID", unique = true)
     private Long orderId;
 
