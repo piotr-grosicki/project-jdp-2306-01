@@ -7,13 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
-@Getter
-@Setter
 @Data
 @AllArgsConstructor
+@Entity(name = "\"GROUP\"")
 @Builder
-@Entity(name = "GROUP")
-@javax.persistence.Table(name = "\"GROUP\"")
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,15 +21,10 @@ public class Group {
     @NonNull
     private String groupName;
 
-    private List<Product> products = new ArrayList<>();
-
-    @OneToMany(
-            targetEntity = Product.class,
-            mappedBy = "\"GROUP\"",
+    @OneToMany(targetEntity = Product.class,
+            mappedBy = "group",
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    public List<Product> getProducts() {
-        return products;
-    }
+            fetch = FetchType.LAZY)
+    @Builder.Default
+    public List<Product> productList = new ArrayList<>();
 }
