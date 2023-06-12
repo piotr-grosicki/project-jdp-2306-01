@@ -26,15 +26,24 @@ public class User {
     private String userToken;
 
     @Column(name = "USER_TOKEN_VALID")
-    private LocalDate userTokenValid;
+    private LocalDate userTokenValid = LocalDate.now();
 
     @Column(name = "USER_BLOCKED")
-    private boolean isUserBlocked;
+    private boolean isUserBlocked = true;
 
     @OneToMany(targetEntity = Cart.class,
             mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    public List<Cart> getCartsList = new ArrayList();
+    public List<Cart> cartList = new ArrayList();
+
+    public User (Long userId, String userName, String userToken, LocalDate userTokenValid, boolean isUserBlocked) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userToken = userToken;
+        this.userTokenValid = userTokenValid;
+        this.isUserBlocked = isUserBlocked;
+    }
+
 }
 
