@@ -20,14 +20,42 @@ public class UserEntityTest {
     private UserEntityRepository userEntityRepository;
 
     @Test
-    public void givenUserEntityRepository_whenSaveAndRetrieveEntity_thenOK() {
+    public void testUserCreation1() {
         //Given
-        User user1 = new User(10000L,"test user","test Token", LocalDate.now(), false, new ArrayList<>());
+        User user1 = User.builder().userName("test user").build();
         //When
         userEntityRepository.save(user1);
         Optional<User> retrievedUser = userEntityRepository.findUserByUserName("test user");
         //Then
         assertTrue(retrievedUser.isPresent());
         assertEquals(user1.getUserName(),retrievedUser.get().getUserName());
+    }
+    @Test
+    public void testUserCreation2() {
+        //Given
+        User user2 = User.builder().userName("test user2").isUserBlocked(true).userToken("test token").userTokenValid(LocalDate.now()).build();
+        //When
+        userEntityRepository.save(user2);
+        Optional<User> retrievedUser2 = userEntityRepository.findUserByUserName("test user2");
+        //Then
+        assertTrue(retrievedUser2.isPresent());
+        assertEquals(user2.getUserName(),retrievedUser2.get().getUserName());
+    }
+    @Test
+    public void testUserCreation3() {
+        //Given
+        User user3 = User.builder()
+                .userName("test user3")
+                .isUserBlocked(false)
+                .userToken("test token")
+                .userTokenValid(LocalDate.now())
+                .cartList(new ArrayList<>())
+                .build();
+        //When
+        userEntityRepository.save(user3);
+        Optional<User> retrievedUser3 = userEntityRepository.findUserByUserName("test user3");
+        //Then
+        assertTrue(retrievedUser3.isPresent());
+        assertEquals(user3.getUserName(),retrievedUser3.get().getUserName());
     }
 }
