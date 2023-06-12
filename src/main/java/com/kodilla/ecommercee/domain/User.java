@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
 
+@Builder
 @NoArgsConstructor
 @Getter
 @AllArgsConstructor
@@ -17,7 +19,6 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
-
 
     @Column(name = "USER_NAME")
     private String userName;
@@ -35,6 +36,7 @@ public class User {
             mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    public List<Cart> getCartsList = new ArrayList();
+    public List<Cart> cartList = new ArrayList();
+
 }
 
