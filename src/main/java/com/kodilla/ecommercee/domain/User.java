@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
 
+@Builder
 @NoArgsConstructor
 @Getter
 @AllArgsConstructor
@@ -18,7 +20,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
 
-
     @Column(name = "USER_NAME")
     private String userName;
 
@@ -26,24 +27,16 @@ public class User {
     private String userToken;
 
     @Column(name = "USER_TOKEN_VALID")
-    private LocalDate userTokenValid = LocalDate.now();
+    private LocalDate userTokenValid;
 
     @Column(name = "USER_BLOCKED")
-    private boolean isUserBlocked = true;
+    private boolean isUserBlocked;
 
     @OneToMany(targetEntity = Cart.class,
             mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     public List<Cart> cartList = new ArrayList();
-
-    public User (Long userId, String userName, String userToken, LocalDate userTokenValid, boolean isUserBlocked) {
-        this.userId = userId;
-        this.userName = userName;
-        this.userToken = userToken;
-        this.userTokenValid = userTokenValid;
-        this.isUserBlocked = isUserBlocked;
-    }
 
 }
 
