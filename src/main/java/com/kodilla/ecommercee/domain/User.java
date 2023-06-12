@@ -1,15 +1,13 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
 
 @NoArgsConstructor
 @Getter
+@Setter
 @AllArgsConstructor
 @Entity(name = "USERS")
 public class User {
@@ -17,7 +15,6 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
-
 
     @Column(name = "USER_NAME")
     private String userName;
@@ -31,10 +28,10 @@ public class User {
     @Column(name = "USER_BLOCKED")
     private boolean isUserBlocked;
 
+    @Builder.Default
     @OneToMany(targetEntity = Cart.class,
             mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     public List<Cart> getCartsList = new ArrayList();
 }
-
