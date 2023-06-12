@@ -3,39 +3,38 @@ package com.kodilla.ecommercee.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
 @Getter
 @Data
 @AllArgsConstructor
-@Entity(name = "PRODUCT_GROUPS")
+@Builder
+@Entity(name = "GROUP")
+@javax.persistence.Table(name = "\"GROUP\"")
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "GROUP_ID")
+    @Column(name = "ID")
     private Long groupId;
 
     @Column(name = "GROUP_NAME", unique = true)
     @NonNull
     private String groupName;
 
-    @OneToMany
-    @JoinTable(
-            name="GROUP_PRODUCT",
-            joinColumns=
-            @JoinColumn(name="GROUP_ID", referencedColumnName="GROUP_ID"),
-            inverseJoinColumns=
-            @JoinColumn(name="PRODUCT_ID", referencedColumnName="PRODUCT_ID")
+    private List<Product> products = new ArrayList<>();
+
+    @OneToMany(
+            targetEntity = Product.class,
+            mappedBy = "\"GROUP\"",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
     )
-    private List<Product> productList;
-
-    public Group(String groupName) {
-        this.groupName = groupName;
+    public List<Product> getProducts() {
+        return products;
     }
-
-    public Group(String groupName, List<Product> productList) {
-        this.groupName = groupName;
-        this.productList = productList;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }
