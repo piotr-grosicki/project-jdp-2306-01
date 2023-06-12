@@ -8,6 +8,7 @@ import java.util.List;
 
 @NoArgsConstructor
 @Getter
+@Setter
 @Data
 @AllArgsConstructor
 @Builder
@@ -33,8 +34,5 @@ public class Group {
     )
     public List<Product> getProducts() {
         return products;
-    }
-    public void setProducts(List<Product> products) {
-        this.products = products;
     }
 }
