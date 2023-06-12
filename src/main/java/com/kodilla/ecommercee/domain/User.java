@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
 
+@Builder
 @NoArgsConstructor
 @Getter
 @AllArgsConstructor
@@ -35,5 +37,6 @@ public class User {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     public List<Cart> cartList = new ArrayList();
+
 }
 
