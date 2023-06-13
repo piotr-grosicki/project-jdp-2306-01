@@ -1,15 +1,13 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import javax.persistence.*;
 import java.util.*;
 
+@Builder
 @NoArgsConstructor
 @Getter
+@Setter
 @Data
 @AllArgsConstructor
 @Entity(name = "PRODUCTS")
@@ -35,5 +33,6 @@ public class Product {
             inverseJoinColumns = {
             @JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")}
     )
+    @Builder.Default
     private List<Cart> cartList = new ArrayList<>();
 }
