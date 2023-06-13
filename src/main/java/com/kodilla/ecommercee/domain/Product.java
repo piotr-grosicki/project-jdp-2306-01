@@ -25,7 +25,6 @@ public class Product {
     @JoinColumn(name = "GROUP_ID")
     private Group group;
 
-    @Builder.Default
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable (
             name = "JOIN_PRODUCT_CART",
@@ -34,5 +33,6 @@ public class Product {
             inverseJoinColumns = {
             @JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")}
     )
+    @Builder.Default
     private List<Cart> cartList = new ArrayList<>();
 }
