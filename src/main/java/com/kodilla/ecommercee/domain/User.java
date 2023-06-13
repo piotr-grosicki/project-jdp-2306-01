@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 @Builder
+@NoArgsConstructor
 @Getter
 @Setter
 @AllArgsConstructor
@@ -33,6 +34,7 @@ public class User {
             mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
+
     @Builder.Default
     public List<Cart> cartList = new ArrayList();
 }
