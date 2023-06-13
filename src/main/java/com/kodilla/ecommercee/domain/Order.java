@@ -7,9 +7,10 @@ import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
+@Data
 @Entity(name = "ORDERS")
 public class Order {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ORDER_ID", unique = true)

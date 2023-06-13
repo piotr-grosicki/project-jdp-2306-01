@@ -2,16 +2,15 @@ package com.kodilla.ecommercee.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
-@Getter
-@Data
 @AllArgsConstructor
+@Data
 @Entity(name = "PRODUCTS")
 public class Product {
 

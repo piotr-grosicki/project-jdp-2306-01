@@ -1,18 +1,15 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
 
-@Builder
 @NoArgsConstructor
-@Getter
 @AllArgsConstructor
+@Data
+@Builder
 @Entity(name = "USERS")
 public class User {
 
@@ -39,4 +36,3 @@ public class User {
     public List<Cart> cartList = new ArrayList();
 
 }
-
