@@ -33,5 +33,5 @@ public class User {
             mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    public List<Cart> getCartsList = new ArrayList();
+    public List<Cart> cartList = new ArrayList();
 }
