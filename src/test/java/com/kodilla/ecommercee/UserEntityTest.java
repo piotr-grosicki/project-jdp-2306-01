@@ -1,7 +1,7 @@
 package com.kodilla.ecommercee;
 
 import com.kodilla.ecommercee.domain.User;
-import com.kodilla.ecommercee.repository.UserEntityRepository;
+import com.kodilla.ecommercee.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,15 +17,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest()
 public class UserEntityTest {
     @Autowired
-    private UserEntityRepository userEntityRepository;
+    private UserRepository userRepository;
 
     @Test
     public void testUserCreation1() {
         //Given
         User user1 = User.builder().userName("test user").build();
         //When
-        userEntityRepository.save(user1);
-        Optional<User> retrievedUser = userEntityRepository.findUserByUserName("test user");
+        userRepository.save(user1);
+        Optional<User> retrievedUser = userRepository.findUserByUserName("test user");
         //Then
         assertTrue(retrievedUser.isPresent());
         assertEquals(user1.getUserName(),retrievedUser.get().getUserName());
@@ -35,8 +35,8 @@ public class UserEntityTest {
         //Given
         User user2 = User.builder().userName("test user2").isUserBlocked(true).userToken("test token").userTokenValid(LocalDate.now()).build();
         //When
-        userEntityRepository.save(user2);
-        Optional<User> retrievedUser2 = userEntityRepository.findUserByUserName("test user2");
+        userRepository.save(user2);
+        Optional<User> retrievedUser2 = userRepository.findUserByUserName("test user2");
         //Then
         assertTrue(retrievedUser2.isPresent());
         assertEquals(user2.getUserName(),retrievedUser2.get().getUserName());
@@ -52,8 +52,8 @@ public class UserEntityTest {
                 .cartList(new ArrayList<>())
                 .build();
         //When
-        userEntityRepository.save(user3);
-        Optional<User> retrievedUser3 = userEntityRepository.findUserByUserName("test user3");
+        userRepository.save(user3);
+        Optional<User> retrievedUser3 = userRepository.findUserByUserName("test user3");
         //Then
         assertTrue(retrievedUser3.isPresent());
         assertEquals(user3.getUserName(),retrievedUser3.get().getUserName());
