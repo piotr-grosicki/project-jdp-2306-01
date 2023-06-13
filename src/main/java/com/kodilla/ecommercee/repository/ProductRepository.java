@@ -19,4 +19,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
     @Override
     void deleteById(Long productId);
+
+    @Override
+    void deleteAll();
 }
