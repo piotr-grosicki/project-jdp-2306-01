@@ -7,6 +7,7 @@ import java.util.*;
 
 @NoArgsConstructor
 @Getter
+@Setter
 @Data
 @AllArgsConstructor
 @Entity(name = "PRODUCTS")
@@ -24,6 +25,7 @@ public class Product {
     @JoinColumn(name = "GROUP_ID")
     private Group group;
 
+    @Builder.Default
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable (
             name = "JOIN_PRODUCT_CART",
