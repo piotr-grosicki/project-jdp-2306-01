@@ -41,8 +41,8 @@ public class CartEntityTestSuite {
         assertEquals(cart.getCartId(), foundCarts.get().getCartId());
 
         //Cleanup
-        cartRepository.deleteById(cart.getCartId());
-        userRepository.deleteById(user.getUserId());
+        cartRepository.deleteAll();
+        userRepository.deleteAll();
     }
     @Test
     public void testFindAllCarts() {
@@ -70,9 +70,7 @@ public class CartEntityTestSuite {
         assertEquals(cart2.getCartId(), foundCarts.get(1).getCartId());
 
         //Cleanup
-        cartRepository.deleteById(cart1.getCartId());
-        cartRepository.deleteById(cart2.getCartId());
-        userRepository.deleteById(user1.getUserId());
-        userRepository.deleteById(user2.getUserId());
+        cartRepository.deleteAll();
+        userRepository.deleteAll();
     }
 }
