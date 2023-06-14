@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -57,5 +58,19 @@ public class UserEntityTest {
         //Then
         assertTrue(retrievedUser3.isPresent());
         assertEquals(user3.getUserName(),retrievedUser3.get().getUserName());
+    }
+
+    @Test
+    public void testUserCreation4() {
+        //Given
+        User user4 = User.builder()
+                .userName("test user4")
+                .build();
+        //When
+        userRepository.save(user4);
+        List<User> retrievedUsers = userRepository.findUsersByUserName("test user4");
+        //Then
+        assertEquals(retrievedUsers.get(0).getUserName(),"test user4");
+        assertEquals(retrievedUsers.size(),1);
     }
 }
