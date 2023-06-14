@@ -4,8 +4,8 @@ import com.kodilla.ecommercee.domain.Product;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.*;
-
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Long> {
     @Override
@@ -22,4 +22,5 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
     @Override
     void deleteAll();
+
 }
