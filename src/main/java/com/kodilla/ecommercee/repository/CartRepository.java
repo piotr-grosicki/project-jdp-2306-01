@@ -5,7 +5,4 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface CartRepository extends CrudRepository<Cart, Long> {
-    @Override
-    List<Cart> findAll();
-}
+public interface CartRepository extends CrudRepository<Cart, Long> {}

@@ -9,11 +9,19 @@ import java.util.Optional;
 
 @Repository
 public interface GroupRepository extends CrudRepository<Group, Long> {
-    Group findByGroupName(String name);
+    @Override
+    List<Group> findAll();
 
     @Override
-    List<Group>findAll();
+    Group save(Group group);
 
     @Override
     Optional<Group> findById(Long groupId);
+
+    @Override
+    void deleteById(Long groupId);
+
+    @Override
+    void deleteAll();
+    Optional<Group> findByGroupName(String name);
 }
