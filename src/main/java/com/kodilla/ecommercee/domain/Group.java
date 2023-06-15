@@ -25,8 +25,13 @@ public class Group {
 
     @OneToMany(targetEntity = Product.class,
             mappedBy = "group",
-            cascade = CascadeType.ALL,
+            cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},
             fetch = FetchType.EAGER)
     @Builder.Default
     public List<Product> productList = new ArrayList<>();
+
+    @PreRemove
+    private void preRemove() {
+        productList.forEach(productList -> productList.setGroup(null));
+    }
 }
