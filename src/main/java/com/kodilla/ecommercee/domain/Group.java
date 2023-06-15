@@ -3,6 +3,7 @@ package com.kodilla.ecommercee.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class Group {
     private Long groupId;
 
     @Column(name = "GROUP_NAME", unique = true)
-    @NonNull
+    @NotNull
     private String groupName;
 
     @OneToMany(targetEntity = Product.class,
