@@ -36,6 +36,6 @@ public class User {
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     @Builder.Default
-    public List<Cart> cartList = new ArrayList();
+    public List<Cart> cartList = new ArrayList<>();
 
 }
