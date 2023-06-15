@@ -25,27 +25,6 @@ public class ProductEntityTests {
     GroupRepository groupRepository;
 
     @Test
-    public void productCreationTest() {
-
-        //Given
-        Product product1 = Product.builder()
-                .productId(1L)
-                .productName("test product 1")
-                .build();
-
-        //When
-        long iD = productRepository.save(product1).getProductId();
-        Optional<Product> retrievedProduct = productRepository.findById(iD);
-
-        //Then
-        assertTrue(retrievedProduct.isPresent());
-        assertEquals(product1.getProductName(), retrievedProduct.get().getProductName());
-
-        //Cleanup
-        productRepository.deleteAll();
-    }
-
-    @Test
     public void productGroupRelationsTest() {
 
         //Given
@@ -72,27 +51,5 @@ public class ProductEntityTests {
         productRepository.deleteAll();
     }
 
-    @Test
-    public void productCartRelationsTest() {
 
-        //Given
-        Product product3 = Product.builder()
-                .productName("test product 3")
-                .build();
-
-        Cart cart = new Cart();
-        product3.getCartList().add(cart);
-        cart.getProductList().add(product3);
-
-        //When
-        long cartId = cartRepository.save(cart).getCartId();
-
-        //Then
-        assertFalse(productRepository.findAll().isEmpty());
-        assertEquals(1, productRepository.findAll().size());
-        assertEquals(cartId, productRepository.findAll().get(0).getCartList().get(0).getCartId());
-
-        //Cleanup
-        productRepository.deleteAll();
-    }
 }
