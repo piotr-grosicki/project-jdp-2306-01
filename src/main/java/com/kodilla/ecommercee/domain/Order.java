@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @Builder
 @Entity(name = "ORDERS")
 public class Order {
