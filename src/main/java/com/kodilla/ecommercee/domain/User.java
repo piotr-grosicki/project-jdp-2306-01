@@ -5,11 +5,10 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
 
-@Builder
 @NoArgsConstructor
-@Getter
-@Setter
 @AllArgsConstructor
+@Data
+@Builder
 @Entity(name = "USERS")
 public class User {
 
@@ -29,12 +28,11 @@ public class User {
     @Column(name = "USER_BLOCKED")
     private boolean isUserBlocked;
 
-
     @OneToMany(targetEntity = Cart.class,
             mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-
     @Builder.Default
     public List<Cart> cartList = new ArrayList();
+
 }
