@@ -11,13 +11,13 @@ import java.util.Optional;
 public interface OrderRepository extends CrudRepository<Order, Long> {
 
     @Override
+    Order save(Order order);
+
+    @Override
     Optional<Order> findById(Long orderId);
 
     @Override
     List<Order> findAll();
-
-    @Override
-    Order save(Order order);
 
     @Override
     void deleteById(Long orderId);

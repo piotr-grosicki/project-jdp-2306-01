@@ -7,11 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
-@Data
 @AllArgsConstructor
-@Entity(name = "\"GROUP\"")
+@Data
 @Builder
+@Entity(name = "\"GROUP\"")
 public class Group {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")

@@ -4,12 +4,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.*;
 
-@Builder
 @NoArgsConstructor
-@Getter
-@Setter
-@Data
 @AllArgsConstructor
+@Data
+@Builder
 @Entity(name = "PRODUCTS")
 public class Product {
 
