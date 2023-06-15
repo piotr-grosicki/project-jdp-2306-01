@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.domain;
 
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.*;
 
 @NoArgsConstructor
@@ -17,10 +18,12 @@ public class Product {
     private Long productId;
 
     @Column(name = "PRODUCT_NAME")
+    @NotNull
     private String productName;
 
     @ManyToOne
     @JoinColumn(name = "GROUP_ID")
+    @NotNull
     private Group group;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
