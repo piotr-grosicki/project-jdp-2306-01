@@ -1,7 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.*;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -29,4 +28,5 @@ public class Group {
             fetch = FetchType.EAGER)
     @Builder.Default
     public List<Product> productList = new ArrayList<>();
+
 }
