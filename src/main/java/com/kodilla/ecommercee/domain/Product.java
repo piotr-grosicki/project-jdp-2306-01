@@ -40,7 +40,6 @@ public class Product {
     @PreRemove
     public void removeThisFromRelations() {
         group.getProductList().remove(this);
-
         for (Cart cart : cartList) {
             cart.getProductList().remove(this);
         }
