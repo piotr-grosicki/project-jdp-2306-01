@@ -4,16 +4,15 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Builder
-@Entity(name = "\"GROUP\"")
+@Entity
+@Table(name = "\"GROUP\"")
 public class Group {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
@@ -25,7 +24,7 @@ public class Group {
 
     @OneToMany(targetEntity = Product.class,
             mappedBy = "group",
-            cascade = CascadeType.ALL,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             fetch = FetchType.EAGER)
     @Builder.Default
     public List<Product> productList = new ArrayList<>();
