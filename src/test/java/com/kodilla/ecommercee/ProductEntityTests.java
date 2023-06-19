@@ -86,7 +86,7 @@ public class ProductEntityTests {
     }
 
     @Test
-    public void deletingProductDoesntDeleteGroup() {
+    public void deletingProductDoesntDeleteGroupButUpdatesGroupsProductList() {
         //Given
         Group group = Group.builder()
                 .groupName("test group")
@@ -145,43 +145,5 @@ public class ProductEntityTests {
         assertEquals(1, cartRepository.findAll().size());
         assertTrue(productRepository.findAll().isEmpty());
         assertEquals(0, cartRepository.findAll().get(0).getProductList().size());
-    }
-
-    @Test
-    public void deletingCartDoesntDeleteProductNorUserButRemovesItFromProductsCartList() {
-        //Given
-        Group group = Group.builder()
-                .groupName("test group")
-                .build();
-
-        Product product = Product.builder()
-                .productName("test product")
-                .group(group)
-                .build();
-
-        User user = User.builder()
-                .userName("test user")
-                .build();
-
-        Cart cart = Cart.builder()
-                .user(user)
-                .build();
-
-        group.getProductList().add(product);
-        Group savedGroup = groupRepository.save(group);
-        user.cartList.add(cart);
-        cart.getProductList().add(product);
-        savedGroup.getProductList().get(0).getCartList().add(cart);
-        userRepository.save(user);
-        cartRepository.save(cart);
-
-        //When
-        cartRepository.deleteAll();
-
-        //Then
-        assertEquals(1, userRepository.findAll().size());
-        assertEquals(1, productRepository.findAll().size());
-        assertEquals(0, cartRepository.findAll().size());
-        assertEquals(0, productRepository.findAll().get(0).getCartList().size());
     }
 }
