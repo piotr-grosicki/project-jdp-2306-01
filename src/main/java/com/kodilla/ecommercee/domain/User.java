@@ -33,8 +33,9 @@ public class User {
 
     @OneToMany(targetEntity = Cart.class,
             mappedBy = "user",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
+            cascade = {CascadeType.MERGE, CascadeType.REMOVE},
+            fetch = FetchType.EAGER,
+            orphanRemoval = true)
     @Builder.Default
     public List<Cart> cartList = new ArrayList<>();
 

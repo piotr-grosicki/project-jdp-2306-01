@@ -26,7 +26,7 @@ public class Product {
     @NotNull
     private Group group;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable (
             name = "JOIN_PRODUCT_CART",
             joinColumns = {
@@ -36,4 +36,12 @@ public class Product {
     )
     @Builder.Default
     private List<Cart> cartList = new ArrayList<>();
+
+    @PreRemove
+    public void removeThisFromRelations() {
+        group.getProductList().remove(this);
+        for (Cart cart : cartList) {
+            cart.getProductList().remove(this);
+        }
+    }
 }

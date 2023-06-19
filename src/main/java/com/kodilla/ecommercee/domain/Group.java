@@ -11,7 +11,8 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Builder
-@Entity(name = "\"GROUP\"")
+@Entity
+@Table(name = "\"GROUP\"")
 public class Group {
 
     @Id
@@ -25,7 +26,7 @@ public class Group {
 
     @OneToMany(targetEntity = Product.class,
             mappedBy = "group",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.MERGE,
             fetch = FetchType.EAGER)
     @Builder.Default
     public List<Product> productList = new ArrayList<>();

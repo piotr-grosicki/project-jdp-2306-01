@@ -24,6 +24,15 @@ public class Cart {
     @NotNull
     private User user;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "cartList")
+    @ManyToMany(mappedBy = "cartList", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @Builder.Default
     private List<Product> productList = new ArrayList<>();
+
+    @PreRemove
+    private void removeThisFromRelations() {
+        user.getCartList().remove(this);
+        for (Product product : productList) {
+            product.getCartList().remove(this);
+        }
+    }
 }
