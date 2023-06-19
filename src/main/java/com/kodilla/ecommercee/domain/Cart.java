@@ -27,7 +27,7 @@ public class Cart {
     private List<Product> productList = new ArrayList<>();
 
     @PreRemove
-    private void removeThisFromUser() {
+    private void removeThisFromRelations() {
         user.getCartList().remove(this);
         for (Product product : productList) {
             product.getCartList().remove(this);
