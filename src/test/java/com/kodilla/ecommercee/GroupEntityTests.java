@@ -1,67 +1,68 @@
 package com.kodilla.ecommercee;
 
-import com.kodilla.ecommercee.domain.Group;
-import com.kodilla.ecommercee.domain.Product;
+import com.kodilla.ecommercee.domain.*;
+import com.kodilla.ecommercee.repository.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import com.kodilla.ecommercee.repository.GroupRepository;
-import com.kodilla.ecommercee.repository.ProductRepository;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import javax.transaction.Transactional;
+import static org.junit.jupiter.api.Assertions.*;
 
-
+@Transactional
 @SpringBootTest
+@Component
+@Service
 public class GroupEntityTests {
-
     @Autowired
-    private GroupRepository groupRepository;
+    ProductRepository productRepository;
     @Autowired
-    private ProductRepository productRepository;
-
+    GroupRepository groupRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @Test
-    public void testAddProductToGroup() {
-        //GIVEN
+    public void productAndGroupRelationInitializing() {
+        //Given
+        Group group = Group.builder()
+                .groupName("test group")
+                .build();
 
-        Group group1 = new Group();
-        groupRepository.save(group1);
+        Product product = Product.builder()
+                .productName("test product")
+                .group(group)
+                .build();
 
-        Product product1 = new Product();
-        Product product2 = new Product();
-        productRepository.save(product1);
-        productRepository.save(product2);
-        group1.getProductList().add(product1);
-        group1.getProductList().add(product2);
+        group.getProductList().add(product);
 
-        Long id1 = group1.getGroupId();
+        //When
+        groupRepository.save(group);
 
-        //WHEN
-        int testProductsInGroupSize = group1.getProductList().size();
-
-        //THEN
-        assertEquals(2, testProductsInGroupSize);
-        //CLEAN UP
-        groupRepository.deleteById(id1);
-        productRepository.deleteAll();
-
+        //Then
+        assertTrue(productRepository.findByProductName("test product").isPresent());
+        assertTrue(groupRepository.findByGroupName("test group").isPresent());
+        assertEquals(1, productRepository.findAll().size());
+        assertEquals(1, groupRepository.findByGroupName("test group").get().getProductList().size());
     }
     @Test
-    public void testUpdateGroupData(){
-        //GIVEN
-        Group group1 = new Group();
-        groupRepository.save(group1);
+    public void testUpdateGroupData() {
+        // Given
+        Group group = Group.builder()
+                .groupName("test group")
+                .build();
 
-        //WHEN
-        Long id1 = group1.getGroupId();
-        Group groupById1 = groupRepository.findById(id1).orElse(new Group());
-        groupById1.setGroupName("ChangedName");
-        groupRepository.save(groupById1);
+        Group updatedGroup = Group.builder()
+                .groupName("updated group")
+                .build();
 
-        //THEN
-        System.out.println(groupRepository.findById(id1).get().getGroupName());
-        assertEquals("ChangedName", groupRepository.findById(id1).get().getGroupName());
-        //CLEANUP
-        groupRepository.deleteAll();
+        // When
+        Group savedGroup = groupRepository.save(group);
+        savedGroup.setGroupName(updatedGroup.getGroupName());
+        Group updatedSavedGroup = groupRepository.save(savedGroup);
+
+        // Then
+        assertEquals(updatedGroup.getGroupName(), updatedSavedGroup.getGroupName());
+        assertEquals(savedGroup.getGroupId(), updatedSavedGroup.getGroupId());
     }
-
 }
