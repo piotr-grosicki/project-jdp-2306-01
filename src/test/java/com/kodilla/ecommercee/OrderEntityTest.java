@@ -51,14 +51,15 @@ public class OrderEntityTest {
 
         //When
         user.cartList.add(cart);
-        group.getProductList().add(product);
-        product.getCartList().add(cart);
-        cart.getProductList().add(product);
-        order.setCart(cart);
         userRepository.save(user);
         groupRepository.save(group);
         cartRepository.save(cart);
         orderRepository.save(order);
+        group.getProductList().add(product);
+        product.getCartList().add(cart);
+        cart.getProductList().add(product);
+        order.setCart(cart);
+
 
         //Then
         assertTrue(orderRepository.findById(order.getOrderId()).isPresent());
