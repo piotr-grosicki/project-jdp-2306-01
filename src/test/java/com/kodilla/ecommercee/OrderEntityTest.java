@@ -29,7 +29,7 @@ public class OrderEntityTest {
 
         //Given
         User user = User.builder()
-                .userName("test user")
+                .userName("user")
                 .build();
 
         Group group = Group.builder()
