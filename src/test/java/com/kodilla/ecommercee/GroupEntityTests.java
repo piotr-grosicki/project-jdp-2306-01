@@ -5,15 +5,9 @@ import com.kodilla.ecommercee.repository.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import javax.transaction.Transactional;
 import static org.junit.jupiter.api.Assertions.*;
 
-@Transactional
 @SpringBootTest
-@Component
-@Service
 public class GroupEntityTests {
     @Autowired
     ProductRepository productRepository;
@@ -52,17 +46,13 @@ public class GroupEntityTests {
                 .groupName("test group")
                 .build();
 
-        Group updatedGroup = Group.builder()
-                .groupName("updated group")
-                .build();
-
         // When
         Group savedGroup = groupRepository.save(group);
-        savedGroup.setGroupName(updatedGroup.getGroupName());
-        Group updatedSavedGroup = groupRepository.save(savedGroup);
+        savedGroup.setGroupName("updated group");
+        groupRepository.save(savedGroup);
 
         // Then
-        assertEquals(updatedGroup.getGroupName(), updatedSavedGroup.getGroupName());
-        assertEquals(savedGroup.getGroupId(), updatedSavedGroup.getGroupId());
+        assertEquals(1,groupRepository.findAll().size());
+        assertEquals("updated group",groupRepository.findAll().get(0).getGroupName());
     }
 }
