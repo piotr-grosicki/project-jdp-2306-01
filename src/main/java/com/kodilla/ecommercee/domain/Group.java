@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @Builder
 @Entity
-@Table(name = "\"GROUP\"")
+@Table(name = "groups")
 public class Group {
 
     @Id
