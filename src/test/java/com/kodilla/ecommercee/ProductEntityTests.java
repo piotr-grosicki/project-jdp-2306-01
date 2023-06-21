@@ -1,17 +1,11 @@
 package com.kodilla.ecommercee;
 
-import com.kodilla.ecommercee.domain.Group;
-import com.kodilla.ecommercee.domain.Product;
-import com.kodilla.ecommercee.repository.CartRepository;
-import com.kodilla.ecommercee.repository.GroupRepository;
-import com.kodilla.ecommercee.repository.ProductRepository;
-import com.kodilla.ecommercee.repository.UserRepository;
+import com.kodilla.ecommercee.domain.*;
+import com.kodilla.ecommercee.repository.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class ProductEntityTests {
