@@ -69,14 +69,13 @@ public class ProductEntityTests {
                 .build();
 
         group.getProductList().add(product);
-
-        //When
-        Group savedGroup = groupRepository.save(group);
         user.cartList.add(cart);
         cart.getProductList().add(product);
-        savedGroup.getProductList().get(0).getCartList().add(cart);
+        product.getCartList().add(cart);
+
+        //When
+        groupRepository.save(group);
         userRepository.save(user);
-        cartRepository.save(cart);
 
         //Then
         assertEquals(1, productRepository.findAll().size());
@@ -130,12 +129,11 @@ public class ProductEntityTests {
                 .build();
 
         group.getProductList().add(product);
-        Group savedGroup = groupRepository.save(group);
         user.cartList.add(cart);
         cart.getProductList().add(product);
-        savedGroup.getProductList().get(0).getCartList().add(cart);
+        product.getCartList().add(cart);
+        groupRepository.save(group);
         userRepository.save(user);
-        Cart cart1 = cartRepository.save(cart);
 
         //When
         productRepository.deleteAll();
