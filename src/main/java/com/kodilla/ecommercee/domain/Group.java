@@ -9,7 +9,8 @@ import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Builder
 @Entity
 @Table(name = "\"GROUP\"")
@@ -26,7 +27,7 @@ public class Group {
 
     @OneToMany(targetEntity = Product.class,
             mappedBy = "group",
-            cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},
+            cascade = {CascadeType.DETACH,CascadeType.PERSIST,CascadeType.REFRESH},
             fetch = FetchType.EAGER)
     @Builder.Default
     public List<Product> productList = new ArrayList<>();
