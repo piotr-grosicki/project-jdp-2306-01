@@ -44,4 +44,5 @@ public class Product {
             cart.getProductList().remove(this);
         }
     }
+}
 
