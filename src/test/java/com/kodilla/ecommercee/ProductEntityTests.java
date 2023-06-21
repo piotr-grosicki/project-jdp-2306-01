@@ -15,15 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 public class ProductEntityTests {
-
-    @Autowired
-    CartRepository cartRepository;
     @Autowired
     ProductRepository productRepository;
     @Autowired
     GroupRepository groupRepository;
-    @Autowired
-    UserRepository userRepository;
 
     @Test
     public void productAndGroupRelationInitializing() {
