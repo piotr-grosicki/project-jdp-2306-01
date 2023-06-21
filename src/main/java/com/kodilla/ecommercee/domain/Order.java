@@ -11,7 +11,6 @@ import javax.validation.constraints.NotNull;
 @Builder
 @Entity(name = "ORDERS")
 public class Order {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ORDER_ID", unique = true)
@@ -25,5 +24,4 @@ public class Order {
     @NotNull
     @Column(name = "ORDER_SENT")
     private boolean isSent;
-
 }

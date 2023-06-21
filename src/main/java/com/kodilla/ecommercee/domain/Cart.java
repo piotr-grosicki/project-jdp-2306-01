@@ -4,8 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,7 +12,6 @@ import java.util.List;
 @Builder
 @Entity(name = "CARTS")
 public class Cart {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "CART_ID")
@@ -35,4 +33,3 @@ public class Cart {
             product.getCartList().remove(this);
         }
     }
-}
