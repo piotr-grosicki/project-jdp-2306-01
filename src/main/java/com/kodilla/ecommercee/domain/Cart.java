@@ -19,7 +19,6 @@ public class Cart {
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")
-    @NotNull
     private User user;
 
     @ManyToMany(mappedBy = "cartList", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)

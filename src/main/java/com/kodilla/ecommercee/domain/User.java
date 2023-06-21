@@ -12,6 +12,7 @@ import java.util.*;
 @Builder
 @Entity(name = "USERS")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
@@ -32,8 +33,12 @@ public class User {
 
     @OneToMany(targetEntity = Cart.class,
             mappedBy = "user",
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},
             fetch = FetchType.EAGER)
     @Builder.Default
     public List<Cart> cartList = new ArrayList<>();
+    @PreRemove
+    private void preRemove() {
+        cartList.forEach(cartList -> cartList.setUser(null));
+    }
 }

@@ -1,6 +1,9 @@
 package com.kodilla.ecommercee;
 
+import com.kodilla.ecommercee.domain.Cart;
+import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.User;
+import com.kodilla.ecommercee.repository.CartRepository;
 import com.kodilla.ecommercee.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class UserEntityTest {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private CartRepository cartRepository;
 
     @Test
     public void testUserCreation1() {
@@ -72,5 +77,23 @@ public class UserEntityTest {
         //Then
         assertEquals(retrievedUsers.get(0).getUserName(),"test user4");
         assertEquals(retrievedUsers.size(),1);
+    }
+    @Test
+    public void testUserCascadeDelete(){
+        //Given
+        User user = User.builder()
+                .userName("test user")
+                .build();
+        Cart cart = Cart.builder().user(user).build();
+        user.cartList.add(cart);
+        //When
+        userRepository.save(user);
+        cartRepository.save(cart);
+        userRepository.deleteAll();
+        List<User> retrievedUsers = userRepository.findUsersByUserName("test user");
+        List<Cart> retrievedCarts = cartRepository.findAll();
+        //Then
+        assertEquals(retrievedUsers.size(),0);
+        assertEquals(retrievedCarts.size(), 1);
     }
 }

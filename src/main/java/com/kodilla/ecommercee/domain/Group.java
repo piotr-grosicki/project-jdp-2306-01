@@ -3,7 +3,8 @@ package com.kodilla.ecommercee.domain;
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,6 +14,7 @@ import java.util.*;
 
 @Table(name = "groups")
 public class Group {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
@@ -24,9 +26,13 @@ public class Group {
 
     @OneToMany(targetEntity = Product.class,
             mappedBy = "group",
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},
             fetch = FetchType.EAGER)
     @Builder.Default
     public List<Product> productList = new ArrayList<>();
 
+    @PreRemove
+    private void preRemove() {
+        productList.forEach(productList -> productList.setGroup(null));
+    }
 }
