@@ -3,12 +3,13 @@ package com.kodilla.ecommercee.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Builder
 @Entity(name = "CARTS")
 public class Cart {
@@ -21,7 +22,7 @@ public class Cart {
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    @ManyToMany(mappedBy = "cartList", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "cartList", cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @Builder.Default
     private List<Product> productList = new ArrayList<>();
 

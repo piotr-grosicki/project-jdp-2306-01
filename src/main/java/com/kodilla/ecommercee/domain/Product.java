@@ -8,7 +8,8 @@ import java.util.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Builder
 @Entity(name = "PRODUCTS")
 public class Product {
@@ -26,7 +27,7 @@ public class Product {
     @NotNull
     private Group group;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "JOIN_PRODUCT_CART",
             joinColumns = {
