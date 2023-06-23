@@ -2,27 +2,33 @@ package com.kodilla.ecommercee.mapper;
 
 import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.domain.dto.GroupDto;
-import com.kodilla.ecommercee.service.GroupService;
+import com.kodilla.ecommercee.exceptions.ProductNotFoundException;
+import com.kodilla.ecommercee.service.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class GroupMapper {
 
+    private final ProductService productService;
+
     public Group mapToGroup(final GroupDto groupDto) {
-        return new Group(groupDto.getGroupId(),
+        Group group =  new Group(groupDto.getGroupId(),
                 groupDto.getGroupName(),
                 new ArrayList<>()
         );
-        //docelowo w miejsce new ArrayList<>() trzeba wstawić listę produktów zmapowaną na podstawie ich id (pobraną z productService)
-        /*return new Group(groupDto.getGroupId(),
-                groupDto.getGroupName(),
-                groupDto.getProductIdList().stream()
-                        .map(id -> productService.getProductById(id))
-                        .toList()
-        );*/
+        for(int i = 0; i < groupDto.getProductIdList().size(); i++){
+            try {
+                group.getProductList().add(productService.getProductById(groupDto.getProductIdList().get(i)));
+            } catch (ProductNotFoundException e) {
+
+            }
+        }
+        return group;
     }
 
     public GroupDto mapToGroupDto(final Group group) {
