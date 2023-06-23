@@ -1,11 +1,14 @@
 package com.kodilla.ecommercee.controller;
 
-
+import com.kodilla.ecommercee.domain.Product;
+import com.kodilla.ecommercee.domain.dto.ProductDto;
+import com.kodilla.ecommercee.exceptions.ProductNotFoundException;
+import com.kodilla.ecommercee.mapper.ProductMapper;
+import com.kodilla.ecommercee.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,29 +17,29 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class ProductController {
+    private final ProductService service;
+    private final ProductMapper productMapper;
 
     @GetMapping
-    public ResponseEntity<List<Object>> getProducts() {
-        return ResponseEntity.ok(new ArrayList<>());
+    public ResponseEntity<List<ProductDto>> getAllProducts() {
+        List<Product> products = service.getAllProducts();
+        return ResponseEntity.ok(productMapper.mapToProductDtoList(products));
     }
-
     @GetMapping(value = "{productId}")
-    public ResponseEntity<Object> getProduct(@PathVariable Long productId) {
-        return ResponseEntity.ok("");
-    }
-
-    @DeleteMapping(value = "{productId}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long productId) {
-        return ResponseEntity.ok().build();
+    public ResponseEntity<ProductDto> getProductById(@PathVariable Long productId) throws ProductNotFoundException {
+        return ResponseEntity.ok(productMapper.mapToProductDto(service.getProductById(productId)));
     }
 
     @PutMapping
-    public ResponseEntity<Object> updateProduct(@RequestBody Object productDto) {
-        return ResponseEntity.ok("");
+    public ResponseEntity<ProductDto> updateProduct(@RequestBody ProductDto productDto) {
+        Product product = productMapper.mapToProduct(productDto);
+        Product updateProduct = service.saveProduct(product);
+        return ResponseEntity.ok(productMapper.mapToProductDto(updateProduct));
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createProduct(@RequestBody Object productDto) {
+    @DeleteMapping(path = "{productId}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long productId) {
+        service.deleteProduct(productId);
         return ResponseEntity.ok().build();
     }
 }

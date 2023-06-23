@@ -9,9 +9,11 @@ import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Builder
-@Entity(name = "\"GROUP\"")
+@Entity
+@Table(name = "\"GROUP\"")
 public class Group {
 
     @Id
@@ -25,8 +27,13 @@ public class Group {
 
     @OneToMany(targetEntity = Product.class,
             mappedBy = "group",
-            cascade = CascadeType.ALL,
+            cascade = {CascadeType.DETACH,CascadeType.PERSIST,CascadeType.REFRESH},
             fetch = FetchType.EAGER)
     @Builder.Default
     public List<Product> productList = new ArrayList<>();
+
+    @PreRemove
+    private void preRemove() {
+        productList.forEach(productList -> productList.setGroup(null));
+    }
 }
