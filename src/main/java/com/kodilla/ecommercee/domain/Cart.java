@@ -24,5 +24,6 @@ public class Cart {
     private User user;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "cartList")
+    @Builder.Default
     private List<Product> productList = new ArrayList<>();
 }
