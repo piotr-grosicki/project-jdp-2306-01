@@ -21,7 +21,6 @@ public class Cart {
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")
-    @NotNull
     private User user;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "cartList")
