@@ -13,6 +13,6 @@ public class CartMapper {
         return new Cart();
     }
     public CartDto mapToCartDto(final @NotNull Cart cartDto) {
-        return new CartDto(1L, new UserDto(1L));
+        return new CartDto(1L, new UserDto(1L, "1"));
     }
 }
