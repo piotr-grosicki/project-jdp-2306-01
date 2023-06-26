@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -41,7 +43,7 @@ public class UserEntityTest {
     @Test
     public void testUserCreation2() {
         //Given
-        User user2 = User.builder().userName("test user2").isUserBlocked(true).userToken("test token").userTokenValid(LocalDate.now()).build();
+        User user2 = User.builder().userName("test user2").isUserBlocked(true).userToken("test token").userTokenValid(new Timestamp(System.currentTimeMillis())).build();
         //When
         userRepository.save(user2);
         Optional<User> retrievedUser2 = userRepository.findUserByUserName("test user2");
@@ -56,7 +58,7 @@ public class UserEntityTest {
                 .userName("test user3")
                 .isUserBlocked(false)
                 .userToken("test token")
-                .userTokenValid(LocalDate.now())
+                .userTokenValid(new Timestamp(System.currentTimeMillis()))
                 .cartList(new ArrayList<>())
                 .build();
         //When

@@ -1,11 +1,16 @@
 package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.controller.exceptions.UserBlockedException;
 import com.kodilla.ecommercee.domain.dto.UserDto;
+import com.kodilla.ecommercee.domain.dto.UserFullDto;
+import com.kodilla.ecommercee.controller.exceptions.UserNotFoundException;
+import com.kodilla.ecommercee.mapper.UserMapper;
+import com.kodilla.ecommercee.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -13,30 +18,42 @@ import java.util.List;
 @CrossOrigin("*")
 @RequiredArgsConstructor
 public class UserController {
-    @GetMapping
-    public List<UserDto> getUsers() {
-        return new ArrayList<>();
-    }
+
+    private final UserMapper userMapper;
+    private final UserService userService;
 
     @GetMapping(value = "{userId}")
-    public UserDto getUser(@PathVariable Long userId) {
-        return new UserDto(1L);
+    public ResponseEntity<UserFullDto> getUser(@PathVariable Long userId) throws UserNotFoundException {
+        return ResponseEntity.ok(userMapper.mapToUserFullDto(userService.findUserById(userId)));
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createUser(@RequestBody UserDto userDto) {
+    @GetMapping
+    public ResponseEntity<List<UserFullDto>> getUsers() {
+        return ResponseEntity.ok(userMapper.mapToUserFullDtoList(userService.getUsers()));
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public UserDto blockUser(@RequestBody UserDto userDto) {
-        return new UserDto(1L);
+    @PostMapping(value ="/create", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> createUser(@RequestBody UserDto userDto) {
+        userService.saveUser(userMapper.mapToUser(userDto));
+        return ResponseEntity.ok("New user " + userDto.getUserName() + " was successfully created");
     }
 
-    @PutMapping(value ="/token", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void generateToken(@RequestBody UserDto userDto) {
+    @PutMapping(value ="/token/{userId}")
+    public ResponseEntity<UserFullDto> generateToken(@PathVariable Long userId) throws UserNotFoundException, UserBlockedException {
+        userService.generateToken(userId);
+        return ResponseEntity.ok(userMapper.mapToUserFullDto(userService.findUserById(userId)));
     }
 
-    @DeleteMapping(value = "{userId}")
-    public void deleteUser(@PathVariable Long userId) {
+    @PutMapping(value ="/block/{userId}")
+    public ResponseEntity<Object> blockUser(@PathVariable Long userId) throws UserNotFoundException {
+        userService.blockUser(userId);
+        return ResponseEntity.ok("User " + userService.findUserById(userId).getUserName() + " was successfully blocked");
+    }
+
+    @DeleteMapping(value = "/delete/{userId}")
+    public ResponseEntity<Object> deleteUser(@PathVariable Long userId) throws UserNotFoundException {
+        String userName = userService.findUserById(userId).getUserName();
+        userService.deleteById(userId);
+        return ResponseEntity.ok("User " + userName + " was successfully deleted");
     }
 }

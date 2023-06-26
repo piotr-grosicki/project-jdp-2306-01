@@ -16,7 +16,7 @@ public class CartController {
 
     @PostMapping(value = "/new", consumes = MediaType.APPLICATION_JSON_VALUE)
     public CartDto createCart(@RequestBody UserDto userDto) {
-        return new CartDto(1L, new UserDto(1L));
+        return new CartDto(1L, new UserDto());
     }
 
     @GetMapping(value = "{cartId}")
@@ -36,6 +36,6 @@ public class CartController {
 
     @PostMapping(value = "/carts", consumes = MediaType.APPLICATION_JSON_VALUE)
     public CartDto createCart(@RequestBody CartDto cartDto) {
-        return new CartDto(1L, new UserDto(1L));
+        return new CartDto(1L, new UserDto());
     }
 }

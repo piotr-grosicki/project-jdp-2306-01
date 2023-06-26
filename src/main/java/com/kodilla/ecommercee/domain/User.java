@@ -3,7 +3,7 @@ package com.kodilla.ecommercee.domain;
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+import java.sql.Timestamp;
 import java.util.*;
 
 @NoArgsConstructor
@@ -26,7 +26,7 @@ public class User {
     private String userToken;
 
     @Column(name = "USER_TOKEN_VALID")
-    private LocalDate userTokenValid;
+    private Timestamp userTokenValid;
 
     @Column(name = "USER_BLOCKED")
     @NotNull
