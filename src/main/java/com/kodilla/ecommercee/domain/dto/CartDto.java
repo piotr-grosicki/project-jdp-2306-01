@@ -7,5 +7,5 @@ import lombok.*;
 @Data
 public class CartDto {
     private Long cartId;
-    private UserDto userDto;
+    private Long userId;
 }
